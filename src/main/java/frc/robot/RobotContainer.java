@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveInputStream;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -32,6 +33,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    drivebase.setDefaultCommand(driveFieldOrientedDirectAngle);
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
   }
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
@@ -44,9 +46,15 @@ public class RobotContainer {
  SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(m_driverController::getRightX,
                                                                                              m_driverController::getRightY)
                                                            .headingWhile(true);
-Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle); 
+//Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle); 
 Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);     
-                                                          
+Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
+        () -> MathUtil.applyDeadband(m_driverController.getLeftY(), Constants.OperatorConstants.DEADBAND),
+        () -> MathUtil.applyDeadband(m_driverController.getLeftX(), Constants.OperatorConstants.DEADBAND),
+        () -> m_driverController.getRightX(),
+        () -> m_driverController.getRightY());
+        
+                 
 
 
   /**
