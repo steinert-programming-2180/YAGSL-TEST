@@ -13,7 +13,7 @@ public final class Constants {
   private Constants() {}
 
   // Maximum speed of the robot in meters per second.
-  public static final double MAX_SPEED = 3.5;
+  public static final double MAX_SPEED = 5;
 
   public static final class DrivebaseConstants {
     private DrivebaseConstants() {}
@@ -29,7 +29,7 @@ public final class Constants {
     private OperatorConstants() {}
 
     public static final int kDriverControllerPort = 0;
-    public static final int kSecondDriverControllerPort = 1;
+    public static final int kShooterControllerPort = 1;
     public static final double DEADBAND = 0.05;
   }
 }

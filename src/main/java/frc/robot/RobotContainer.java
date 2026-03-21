@@ -37,6 +37,9 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
+  private final CommandXboxController m_shooterController =
+      new CommandXboxController(OperatorConstants.kShooterControllerPort);
+
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(
@@ -83,10 +86,10 @@ public class RobotContainer {
 
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.rightBumper().whileTrue(intakeSubsystem.bottomClockwiseCommand());
-    m_driverController.leftBumper().whileTrue(intakeSubsystem.bottomCounterClockwiseCommand());
-    m_driverController.rightTrigger().whileTrue(intakeSubsystem.triggerIntakeCommand());
-    m_driverController.leftTrigger().whileTrue(intakeSubsystem.topClockwiseCommand());
+    m_shooterController.rightBumper().whileTrue(intakeSubsystem.bottomClockwiseCommand());
+    m_shooterController.leftBumper().whileTrue(intakeSubsystem.bottomCounterClockwiseCommand());
+    m_shooterController.rightTrigger().whileTrue(intakeSubsystem.triggerIntakeCommand());
+    m_shooterController.leftTrigger().whileTrue(intakeSubsystem.topClockwiseCommand());
     m_driverController.a().onTrue(Commands.runOnce(drivebase::zeroGyro));
 
     if (RobotBase.isSimulation()) {

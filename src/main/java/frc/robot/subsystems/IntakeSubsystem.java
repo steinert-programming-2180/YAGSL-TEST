@@ -41,7 +41,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void runTriggerIntake() {
     runBottomClockwise();
-    runTopClockwise();
+    runTopCounterClockwise();
   }
 
   public void stopTop() {
