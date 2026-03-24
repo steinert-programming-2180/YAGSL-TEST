@@ -40,8 +40,13 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void runTriggerIntake() {
-    runBottomClockwise();
-    runTopCounterClockwise();
+     topIntakeMotor.set(TOP_CLOCKWISE_SPEED);
+     bottomIntakeMotor.set(-BOTTOM_CLOCKWISE_SPEED);
+  }
+
+  public void runTriggerShoot() {
+    topIntakeMotor.set(-TOP_CLOCKWISE_SPEED);
+    bottomIntakeMotor.set(BOTTOM_CLOCKWISE_SPEED);
   }
 
   public void stopTop() {
@@ -71,5 +76,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public Command triggerIntakeCommand() {
     return runEnd(this::runTriggerIntake, this::stopAll);
+  }
+
+  public Command triggerShooterCommand() {
+    return runEnd(this::runTriggerShoot, this::stopAll);
   }
 }

@@ -89,7 +89,7 @@ public class RobotContainer {
     m_shooterController.rightBumper().whileTrue(intakeSubsystem.bottomClockwiseCommand());
     m_shooterController.leftBumper().whileTrue(intakeSubsystem.bottomCounterClockwiseCommand());
     m_shooterController.rightTrigger().whileTrue(intakeSubsystem.triggerIntakeCommand());
-    m_shooterController.leftTrigger().whileTrue(intakeSubsystem.topClockwiseCommand());
+    m_shooterController.leftTrigger().whileTrue(intakeSubsystem.triggerShooterCommand());
     m_driverController.a().onTrue(Commands.runOnce(drivebase::zeroGyro));
 
     if (RobotBase.isSimulation()) {
